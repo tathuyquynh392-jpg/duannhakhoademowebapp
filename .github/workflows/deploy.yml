@@ -44,9 +44,10 @@ jobs:
         env:
           VITE_BASE: /duannhakhoademowebapp/
 
-      - name: Copy index.html to 404.html
+      - name: Copy index.html to 404.html and create .nojekyll
         run: |
           cp frontend/dist/index.html frontend/dist/404.html
+          touch frontend/dist/.nojekyll
 
       - name: Deploy to gh-pages Branch
         uses: JamesIves/github-pages-deploy-action@v4
