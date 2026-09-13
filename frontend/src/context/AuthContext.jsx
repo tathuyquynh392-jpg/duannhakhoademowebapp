@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useState, useEffect } from 'react';
+import React, { createContext, useContext, useState } from 'react';
 import api from '../services/api';
 
 const AuthContext = createContext();
@@ -13,8 +13,12 @@ export const AuthProvider = ({ children }) => {
 
   const login = async (username, password) => {
     setLoading(true);
+    const u = (username || '').trim();
+    const p = (password || '').trim();
+
     try {
-      const response = await api.post('/auth/login', { username, password });
+      // 1. Try real API / demo interceptor endpoint
+      const response = await api.post('/auth/login', { username: u, password: p });
       const data = response.data;
       
       const userData = {
@@ -32,6 +36,39 @@ export const AuthProvider = ({ children }) => {
       setUser(userData);
       return userData;
     } catch (err) {
+      // 2. Fallback Demo Mode Authentication for GitHub Pages / Offline
+      if (u === 'admin' && p === 'admin123') {
+        const demoAdmin = {
+          userId: 1,
+          username: 'admin',
+          fullName: 'Quản trị viên Hệ thống (Demo)',
+          role: 'ADMIN',
+          patientId: null
+        };
+        const demoToken = 'demo_admin_token';
+        localStorage.setItem('lucky_token', demoToken);
+        localStorage.setItem('lucky_user', JSON.stringify(demoAdmin));
+        setToken(demoToken);
+        setUser(demoAdmin);
+        return demoAdmin;
+      }
+
+      if ((u === 'patient01' || u === 'patient1' || u === 'patient02' || u === 'patient03' || u.startsWith('patient')) && p === 'patient123') {
+        const demoPatient = {
+          userId: 2,
+          username: u,
+          fullName: u === 'patient02' ? 'Trần Thị Bích' : (u === 'patient03' ? 'Lê Hoàng Cường' : 'Nguyễn Văn An'),
+          role: 'PATIENT',
+          patientId: 1
+        };
+        const demoToken = 'demo_patient_token';
+        localStorage.setItem('lucky_token', demoToken);
+        localStorage.setItem('lucky_user', JSON.stringify(demoPatient));
+        setToken(demoToken);
+        setUser(demoPatient);
+        return demoPatient;
+      }
+
       throw err.response?.data?.detail || 'Đăng nhập thất bại. Vui lòng kiểm tra lại thông tin.';
     } finally {
       setLoading(false);
