@@ -136,11 +136,13 @@ export const VIETNAM_LOCATIONS = [
 export const getProvinces = () => VIETNAM_LOCATIONS.map(p => p.name);
 
 export const getDistricts = (provinceName) => {
+  if (!provinceName) return [];
   const p = VIETNAM_LOCATIONS.find(item => item.name === provinceName);
   return p ? p.districts.map(d => d.name) : [];
 };
 
 export const getWards = (provinceName, districtName) => {
+  if (!provinceName || !districtName) return [];
   const p = VIETNAM_LOCATIONS.find(item => item.name === provinceName);
   if (!p) return [];
   const d = p.districts.find(item => item.name === districtName);
@@ -148,6 +150,7 @@ export const getWards = (provinceName, districtName) => {
 };
 
 export const getGroups = (provinceName, districtName, wardName) => {
+  if (!provinceName || !districtName || !wardName) return [];
   const p = VIETNAM_LOCATIONS.find(item => item.name === provinceName);
   if (!p) return [];
   const d = p.districts.find(item => item.name === districtName);
@@ -168,11 +171,10 @@ export const parseAddressString = (fullStr) => {
       province: parts[3]
     };
   }
-  return { province: 'Thái Nguyên', district: 'Thành phố Thái Nguyên', ward: 'Phường Hoàng Văn Thụ', group: parts[0] || 'Tổ 5' };
+  return { province: '', district: '', ward: '', group: '' };
 };
 
 export const formatAddressString = (group, ward, district, province) => {
-  if (!province) return '';
-  const list = [group, ward, district, province].filter(Boolean);
-  return list.join(', ');
+  if (!province || !district || !ward || !group) return '';
+  return `${group}, ${ward}, ${district}, ${province}`;
 };

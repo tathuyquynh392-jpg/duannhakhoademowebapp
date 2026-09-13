@@ -40,8 +40,9 @@ const ProfilePage = () => {
 
   const handleUpdate = async (e) => {
     e.preventDefault();
-    if (!address.trim()) {
-      setMessage({ type: 'error', text: 'Vui lòng chọn đầy đủ 4 cấp Địa chỉ theo quy định hành chính.' });
+    const addressParts = (address || '').split(',').map(s => s.trim()).filter(Boolean);
+    if (addressParts.length < 4) {
+      setMessage({ type: 'error', text: 'Vui lòng chọn đầy đủ địa chỉ.' });
       return;
     }
     try {

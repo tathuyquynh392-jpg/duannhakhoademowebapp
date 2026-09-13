@@ -13,63 +13,71 @@ const AddressSelector = ({ value, onChange, required = false, label = "Địa Ch
   const [groupsList, setGroupsList] = useState([]);
   const [loading, setLoading] = useState(false);
 
-  // Initialize from value string prop
+  // Initialize from value string prop (e.g. when editing existing patient)
   useEffect(() => {
     if (value) {
       const parsed = parseAddressString(value);
-      setProvince(parsed.province || 'Thái Nguyên');
-      setDistrict(parsed.district || 'Thành phố Thái Nguyên');
-      setWard(parsed.ward || 'Phường Hoàng Văn Thụ');
-      setGroup(parsed.group || 'Tổ 5');
+      setProvince(parsed.province || '');
+      setDistrict(parsed.district || '');
+      setWard(parsed.ward || '');
+      setGroup(parsed.group || '');
     } else {
-      setProvince('Thái Nguyên');
-      setDistrict('Thành phố Thái Nguyên');
-      setWard('Phường Hoàng Văn Thụ');
-      setGroup('Tổ 5');
+      setProvince('');
+      setDistrict('');
+      setWard('');
+      setGroup('');
     }
-  }, []);
+  }, [value]);
 
-  // Update lists based on selections
+  // Update District list when Province changes
   useEffect(() => {
     if (province) {
       const dists = getDistricts(province);
       setDistrictsList(dists);
       if (!dists.includes(district)) {
-        setDistrict(dists[0] || '');
+        setDistrict('');
+        setWard('');
+        setGroup('');
       }
     } else {
       setDistrictsList([]);
       setDistrict('');
+      setWard('');
+      setGroup('');
     }
   }, [province]);
 
+  // Update Ward list when District changes
   useEffect(() => {
     if (province && district) {
       const wrds = getWards(province, district);
       setWardsList(wrds);
       if (!wrds.includes(ward)) {
-        setWard(wrds[0] || '');
+        setWard('');
+        setGroup('');
       }
     } else {
       setWardsList([]);
       setWard('');
+      setGroup('');
     }
-  }, [province, district]);
+  }, [district]);
 
+  // Update Group list when Ward changes
   useEffect(() => {
     if (province && district && ward) {
       const grps = getGroups(province, district, ward);
       setGroupsList(grps);
       if (!grps.includes(group)) {
-        setGroup(grps[0] || '');
+        setGroup('');
       }
     } else {
       setGroupsList([]);
       setGroup('');
     }
-  }, [province, district, ward]);
+  }, [ward]);
 
-  // Trigger onChange with combined formatted address string
+  // Trigger onChange with formatted combined string when full 4 levels are selected or reset to empty
   useEffect(() => {
     const formatted = formatAddressString(group, ward, district, province);
     if (onChange && formatted !== value) {
@@ -84,7 +92,7 @@ const AddressSelector = ({ value, onChange, required = false, label = "Địa Ch
     setDistrict('');
     setWard('');
     setGroup('');
-    setTimeout(() => setLoading(false), 150);
+    setTimeout(() => setLoading(false), 100);
   };
 
   const handleDistrictChange = (e) => {
@@ -93,7 +101,7 @@ const AddressSelector = ({ value, onChange, required = false, label = "Địa Ch
     setDistrict(val);
     setWard('');
     setGroup('');
-    setTimeout(() => setLoading(false), 150);
+    setTimeout(() => setLoading(false), 100);
   };
 
   const handleWardChange = (e) => {
@@ -101,7 +109,7 @@ const AddressSelector = ({ value, onChange, required = false, label = "Địa Ch
     setLoading(true);
     setWard(val);
     setGroup('');
-    setTimeout(() => setLoading(false), 150);
+    setTimeout(() => setLoading(false), 100);
   };
 
   const handleGroupChange = (e) => {
@@ -125,14 +133,14 @@ const AddressSelector = ({ value, onChange, required = false, label = "Địa Ch
       <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
         {/* 1. Tỉnh / Thành phố */}
         <div>
-          <label className="block text-slate-600 mb-1 font-semibold">1. Tỉnh / Thành phố (*)</label>
+          <label className="block text-slate-600 mb-1 font-semibold">Tỉnh/Thành phố *</label>
           <select
             value={province}
             onChange={handleProvinceChange}
             className="w-full p-2.5 bg-white border border-slate-200 rounded-xl focus:border-sky-500 focus:outline-none font-bold text-slate-800"
             required={required}
           >
-            <option value="">-- Chọn Tỉnh / Thành phố --</option>
+            <option value="">[ Chọn tỉnh/thành phố ▼ ]</option>
             {getProvinces().map((p, idx) => (
               <option key={idx} value={p}>{p}</option>
             ))}
@@ -141,15 +149,17 @@ const AddressSelector = ({ value, onChange, required = false, label = "Địa Ch
 
         {/* 2. Quận / Huyện */}
         <div>
-          <label className="block text-slate-600 mb-1 font-semibold">2. Quận / Huyện / Thị xã (*)</label>
+          <label className="block text-slate-600 mb-1 font-semibold">Quận/Huyện/Thị xã *</label>
           <select
             value={district}
             onChange={handleDistrictChange}
             disabled={!province}
-            className="w-full p-2.5 bg-white border border-slate-200 rounded-xl focus:border-sky-500 focus:outline-none font-bold text-slate-800 disabled:opacity-50"
+            className="w-full p-2.5 bg-white border border-slate-200 rounded-xl focus:border-sky-500 focus:outline-none font-bold text-slate-800 disabled:opacity-50 disabled:bg-slate-100 disabled:cursor-not-allowed"
             required={required}
           >
-            <option value="">-- Chọn Quận / Huyện --</option>
+            <option value="">
+              {!province ? "[ Vui lòng chọn tỉnh trước ▼ ]" : "[ Chọn quận/huyện/thị xã ▼ ]"}
+            </option>
             {districtsList.map((d, idx) => (
               <option key={idx} value={d}>{d}</option>
             ))}
@@ -158,15 +168,17 @@ const AddressSelector = ({ value, onChange, required = false, label = "Địa Ch
 
         {/* 3. Xã / Phường */}
         <div>
-          <label className="block text-slate-600 mb-1 font-semibold">3. Xã / Phường / Thị trấn (*)</label>
+          <label className="block text-slate-600 mb-1 font-semibold">Xã/Phường/Thị trấn *</label>
           <select
             value={ward}
             onChange={handleWardChange}
             disabled={!district}
-            className="w-full p-2.5 bg-white border border-slate-200 rounded-xl focus:border-sky-500 focus:outline-none font-bold text-slate-800 disabled:opacity-50"
+            className="w-full p-2.5 bg-white border border-slate-200 rounded-xl focus:border-sky-500 focus:outline-none font-bold text-slate-800 disabled:opacity-50 disabled:bg-slate-100 disabled:cursor-not-allowed"
             required={required}
           >
-            <option value="">-- Chọn Xã / Phường --</option>
+            <option value="">
+              {!district ? "[ Vui lòng chọn huyện trước ▼ ]" : "[ Chọn xã/phường/thị trấn ▼ ]"}
+            </option>
             {wardsList.map((w, idx) => (
               <option key={idx} value={w}>{w}</option>
             ))}
@@ -175,15 +187,17 @@ const AddressSelector = ({ value, onChange, required = false, label = "Địa Ch
 
         {/* 4. Tổ dân phố / Xóm */}
         <div>
-          <label className="block text-slate-600 mb-1 font-semibold">4. Tổ dân phố / Xóm / Thôn (*)</label>
+          <label className="block text-slate-600 mb-1 font-semibold">Tổ dân phố/Xóm/Thôn *</label>
           <select
             value={group}
             onChange={handleGroupChange}
             disabled={!ward}
-            className="w-full p-2.5 bg-white border border-slate-200 rounded-xl focus:border-sky-500 focus:outline-none font-bold text-slate-800 disabled:opacity-50"
+            className="w-full p-2.5 bg-white border border-slate-200 rounded-xl focus:border-sky-500 focus:outline-none font-bold text-slate-800 disabled:opacity-50 disabled:bg-slate-100 disabled:cursor-not-allowed"
             required={required}
           >
-            <option value="">-- Chọn Tổ dân phố / Xóm --</option>
+            <option value="">
+              {!ward ? "[ Vui lòng chọn xã/phường trước ▼ ]" : "[ Chọn tổ dân phố/xóm/thôn ▼ ]"}
+            </option>
             {groupsList.map((g, idx) => (
               <option key={idx} value={g}>{g}</option>
             ))}
@@ -193,7 +207,9 @@ const AddressSelector = ({ value, onChange, required = false, label = "Địa Ch
 
       <div className="pt-2 text-[11px] text-slate-500 flex items-center justify-between border-t border-slate-200/60">
         <span>Địa chỉ đã chọn:</span>
-        <strong className="text-sky-800 font-extrabold">{formatAddressString(group, ward, district, province) || 'Chưa chọn đủ các cấp'}</strong>
+        <strong className="text-sky-800 font-extrabold">
+          {formatAddressString(group, ward, district, province) || 'Chưa chọn đầy đủ 4 cấp địa chỉ'}
+        </strong>
       </div>
     </div>
   );
