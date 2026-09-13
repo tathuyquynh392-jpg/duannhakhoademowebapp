@@ -1,0 +1,25 @@
+# Node modules & build outputs
+frontend/node_modules/
+frontend/dist/
+frontend/dist-ssr/
+*.local
+
+# Python & Virtual Environments
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+backend/__pycache__/
+backend/*/__pycache__/
+backend/*/*/__pycache__/
+venv/
+.venv/
+env/
+ENV/
+
+# IDE & System files
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
