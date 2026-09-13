@@ -1,4 +1,4 @@
-name: Deploy Lucky Dental Frontend to GitHub Pages
+name: Deploy Lucky Dental React App to GitHub Pages
 
 on:
   push:
