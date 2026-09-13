@@ -1,28 +1,18 @@
-name: Deploy Lucky Dental Frontend to GitHub Pages
+name: Deploy Lucky Dental React Frontend to GitHub Pages
 
 on:
   push:
     branches:
       - main
-  workflow_dispatch:
 
 permissions:
   contents: write
-  pages: write
-  id-token: write
-
-concurrency:
-  group: 'pages'
-  cancel-in-progress: true
 
 jobs:
   build-and-deploy:
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout Repository
+      - name: Checkout Source Code
         uses: actions/checkout@v4
 
       - name: Setup Node.js
@@ -37,26 +27,19 @@ jobs:
           cd frontend
           npm ci
 
-      - name: Build Frontend (Vite)
+      - name: Build Frontend for GitHub Pages
         run: |
           cd frontend
           npm run build
+        env:
+          VITE_BASE: /duannhakhoademowebapp/
 
-      - name: Add 404.html for SPA Routing
+      - name: Copy index.html to 404.html
         run: |
           cp frontend/dist/index.html frontend/dist/404.html
 
-      - name: Deploy to gh-pages branch
-        uses: peaceiris/actions-gh-pages@v4
+      - name: Deploy to GitHub Pages Branch (gh-pages)
+        uses: JamesIves/github-pages-deploy-action@v4
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./frontend/dist
-
-      - name: Upload GitHub Pages Artifact
-        uses: actions/upload-pages-artifact@v3
-        with:
-          path: 'frontend/dist'
-
-      - name: Deploy to GitHub Pages Action
-        id: deployment
-        uses: actions/deploy-pages@v4
+          folder: frontend/dist
+          branch: gh-pages
