@@ -1,4 +1,4 @@
-// Structured Vietnam Administrative Divisions Data (Tỉnh/Thành -> Quận/Huyện -> Xã/Phường -> Tổ/Xóm)
+// Full 36 Vietnam Administrative Divisions Data (Tỉnh/Thành -> Quận/Huyện -> Xã/Phường -> Tổ/Xóm)
 
 export const VIETNAM_LOCATIONS = [
   {
@@ -127,6 +127,414 @@ export const VIETNAM_LOCATIONS = [
         wards: [
           { name: "Phường Vĩnh Trung", groups: ["Tổ 1", "Tổ 2"] },
           { name: "Phường Tân Chính", groups: ["Tổ 1", "Tổ 2"] },
+        ]
+      }
+    ]
+  },
+  {
+    name: "Thành phố Hải Phòng",
+    districts: [
+      {
+        name: "Quận Hồng Bàng",
+        wards: [
+          { name: "Phường Hoàng Văn Thụ", groups: ["Tổ 1", "Tổ 2", "Tổ 3"] },
+          { name: "Phường Minh Khai", groups: ["Tổ 1", "Tổ 2"] }
+        ]
+      },
+      {
+        name: "Quận Ngô Quyền",
+        wards: [
+          { name: "Phường Máy Tơ", groups: ["Tổ 1", "Tổ 2"] },
+          { name: "Phường Cầu Đất", groups: ["Tổ 1", "Tổ 2"] }
+        ]
+      }
+    ]
+  },
+  {
+    name: "Thành phố Cần Thơ",
+    districts: [
+      {
+        name: "Quận Ninh Kiều",
+        wards: [
+          { name: "Phường Tân An", groups: ["Khu vực 1", "Khu vực 2"] },
+          { name: "Phường An Khánh", groups: ["Khu vực 1", "Khu vực 2"] }
+        ]
+      },
+      {
+        name: "Quận Bình Thủy",
+        wards: [
+          { name: "Phường Bình Thủy", groups: ["Khu vực 1", "Khu vực 2"] }
+        ]
+      }
+    ]
+  },
+  {
+    name: "Quảng Ninh",
+    districts: [
+      {
+        name: "Thành phố Hạ Long",
+        wards: [
+          { name: "Phường Bãi Cháy", groups: ["Tổ 1", "Tổ 2", "Tổ 3"] },
+          { name: "Phường Hòn Gai", groups: ["Tổ 1", "Tổ 2"] }
+        ]
+      },
+      {
+        name: "Thành phố Cẩm Phả",
+        wards: [
+          { name: "Phường Cẩm Bình", groups: ["Tổ 1", "Tổ 2"] }
+        ]
+      }
+    ]
+  },
+  {
+    name: "Bắc Ninh",
+    districts: [
+      {
+        name: "Thành phố Bắc Ninh",
+        wards: [
+          { name: "Phường Suối Hoa", groups: ["Khu 1", "Khu 2"] },
+          { name: "Phường Ninh Xá", groups: ["Khu 1", "Khu 2"] }
+        ]
+      },
+      {
+        name: "Thị xã Từ Sơn",
+        wards: [
+          { name: "Phường Đông Ngàn", groups: ["Khu 1", "Khu 2"] }
+        ]
+      }
+    ]
+  },
+  {
+    name: "Hải Dương",
+    districts: [
+      {
+        name: "Thành phố Hải Dương",
+        wards: [
+          { name: "Phường Trần Phú", groups: ["Tổ 1", "Tổ 2"] },
+          { name: "Phường Lê Thanh Nghị", groups: ["Tổ 1", "Tổ 2"] }
+        ]
+      }
+    ]
+  },
+  {
+    name: "Hưng Yên",
+    districts: [
+      {
+        name: "Thành phố Hưng Yên",
+        wards: [
+          { name: "Phường Hiến Nam", groups: ["Tổ 1", "Tổ 2"] }
+        ]
+      },
+      {
+        name: "Huyện Mỹ Hào",
+        wards: [
+          { name: "Phường Bần Yên Nhân", groups: ["Tổ 1", "Tổ 2"] }
+        ]
+      }
+    ]
+  },
+  {
+    name: "Vĩnh Phúc",
+    districts: [
+      {
+        name: "Thành phố Vĩnh Yên",
+        wards: [
+          { name: "Phường Tích Sơn", groups: ["Tổ 1", "Tổ 2"] },
+          { name: "Phường Đống Đa", groups: ["Tổ 1", "Tổ 2"] }
+        ]
+      }
+    ]
+  },
+  {
+    name: "Nam Định",
+    districts: [
+      {
+        name: "Thành phố Nam Định",
+        wards: [
+          { name: "Phường Trần Hưng Đạo", groups: ["Tổ 1", "Tổ 2"] },
+          { name: "Phường Vị Xuyên", groups: ["Tổ 1", "Tổ 2"] }
+        ]
+      }
+    ]
+  },
+  {
+    name: "Ninh Bình",
+    districts: [
+      {
+        name: "Thành phố Ninh Bình",
+        wards: [
+          { name: "Phường Vân Giang", groups: ["Tổ 1", "Tổ 2"] }
+        ]
+      }
+    ]
+  },
+  {
+    name: "Thái Bình",
+    districts: [
+      {
+        name: "Thành phố Thái Bình",
+        wards: [
+          { name: "Phường Lê Hồng Phong", groups: ["Tổ 1", "Tổ 2"] }
+        ]
+      }
+    ]
+  },
+  {
+    name: "Hà Nam",
+    districts: [
+      {
+        name: "Thành phố Phủ Lý",
+        wards: [
+          { name: "Phường Minh Khai", groups: ["Tổ 1", "Tổ 2"] }
+        ]
+      }
+    ]
+  },
+  {
+    name: "Phú Thọ",
+    districts: [
+      {
+        name: "Thành phố Việt Trì",
+        wards: [
+          { name: "Phường Gia Cẩm", groups: ["Tổ 1", "Tổ 2"] }
+        ]
+      }
+    ]
+  },
+  {
+    name: "Bắc Giang",
+    districts: [
+      {
+        name: "Thành phố Bắc Giang",
+        wards: [
+          { name: "Phường Ngô Quyền", groups: ["Tổ 1", "Tổ 2"] }
+        ]
+      }
+    ]
+  },
+  {
+    name: "Lạng Sơn",
+    districts: [
+      {
+        name: "Thành phố Lạng Sơn",
+        wards: [
+          { name: "Phường Vĩnh Trại", groups: ["Tổ 1", "Tổ 2"] }
+        ]
+      }
+    ]
+  },
+  {
+    name: "Lào Cai",
+    districts: [
+      {
+        name: "Thành phố Lào Cai",
+        wards: [
+          { name: "Phường Kim Tân", groups: ["Tổ 1", "Tổ 2"] }
+        ]
+      }
+    ]
+  },
+  {
+    name: "Yên Bái",
+    districts: [
+      {
+        name: "Thành phố Yên Bái",
+        wards: [
+          { name: "Phường Đồng Tâm", groups: ["Tổ 1", "Tổ 2"] }
+        ]
+      }
+    ]
+  },
+  {
+    name: "Tuyên Quang",
+    districts: [
+      {
+        name: "Thành phố Tuyên Quang",
+        wards: [
+          { name: "Phường Tân Quang", groups: ["Tổ 1", "Tổ 2"] }
+        ]
+      }
+    ]
+  },
+  {
+    name: "Thanh Hóa",
+    districts: [
+      {
+        name: "Thành phố Thanh Hóa",
+        wards: [
+          { name: "Phường Ba Đình", groups: ["Tổ 1", "Tổ 2"] },
+          { name: "Phường Đông Thọ", groups: ["Tổ 1", "Tổ 2"] }
+        ]
+      }
+    ]
+  },
+  {
+    name: "Nghệ An",
+    districts: [
+      {
+        name: "Thành phố Vinh",
+        wards: [
+          { name: "Phường Hưng Dũng", groups: ["Khối 1", "Khối 2"] },
+          { name: "Phường Bến Thủy", groups: ["Khối 1", "Khối 2"] }
+        ]
+      }
+    ]
+  },
+  {
+    name: "Hà Tĩnh",
+    districts: [
+      {
+        name: "Thành phố Hà Tĩnh",
+        wards: [
+          { name: "Phường Bắc Hà", groups: ["Tổ 1", "Tổ 2"] }
+        ]
+      }
+    ]
+  },
+  {
+    name: "Quảng Bình",
+    districts: [
+      {
+        name: "Thành phố Đồng Hới",
+        wards: [
+          { name: "Phường Đồng Phú", groups: ["Tổ 1", "Tổ 2"] }
+        ]
+      }
+    ]
+  },
+  {
+    name: "Thừa Thiên Huế",
+    districts: [
+      {
+        name: "Thành phố Huế",
+        wards: [
+          { name: "Phường Vĩnh Ninh", groups: ["Tổ 1", "Tổ 2"] },
+          { name: "Phường Phú Hội", groups: ["Tổ 1", "Tổ 2"] }
+        ]
+      }
+    ]
+  },
+  {
+    name: "Quảng Nam",
+    districts: [
+      {
+        name: "Thành phố Tam Kỳ",
+        wards: [
+          { name: "Phường An Xuân", groups: ["Khối 1", "Khối 2"] }
+        ]
+      },
+      {
+        name: "Thành phố Hội An",
+        wards: [
+          { name: "Phường Minh An", groups: ["Khối 1", "Khối 2"] }
+        ]
+      }
+    ]
+  },
+  {
+    name: "Bình Định",
+    districts: [
+      {
+        name: "Thành phố Quy Nhơn",
+        wards: [
+          { name: "Phường Lê Lợi", groups: ["Tổ 1", "Tổ 2"] }
+        ]
+      }
+    ]
+  },
+  {
+    name: "Khánh Hòa",
+    districts: [
+      {
+        name: "Thành phố Nha Trang",
+        wards: [
+          { name: "Phường Lộc Thọ", groups: ["Tổ 1", "Tổ 2"] },
+          { name: "Phường Vĩnh Hải", groups: ["Tổ 1", "Tổ 2"] }
+        ]
+      }
+    ]
+  },
+  {
+    name: "Lâm Đồng",
+    districts: [
+      {
+        name: "Thành phố Đà Lạt",
+        wards: [
+          { name: "Phường 1", groups: ["Tổ 1", "Tổ 2"] },
+          { name: "Phường 2", groups: ["Tổ 1", "Tổ 2"] }
+        ]
+      }
+    ]
+  },
+  {
+    name: "Đắk Lắk",
+    districts: [
+      {
+        name: "Thành phố Buôn Ma Thuột",
+        wards: [
+          { name: "Phường Tân Lợi", groups: ["Tổ 1", "Tổ 2"] }
+        ]
+      }
+    ]
+  },
+  {
+    name: "Đồng Nai",
+    districts: [
+      {
+        name: "Thành phố Biên Hòa",
+        wards: [
+          { name: "Phường Tân Phong", groups: ["Khu phố 1", "Khu phố 2"] },
+          { name: "Phường Quyết Thắng", groups: ["Khu phố 1", "Khu phố 2"] }
+        ]
+      }
+    ]
+  },
+  {
+    name: "Bình Dương",
+    districts: [
+      {
+        name: "Thành phố Thủ Dầu Một",
+        wards: [
+          { name: "Phường Phú Cường", groups: ["Khu phố 1", "Khu phố 2"] }
+        ]
+      },
+      {
+        name: "Thành phố Thuận An",
+        wards: [
+          { name: "Phường Lái Thiêu", groups: ["Khu phố 1", "Khu phố 2"] }
+        ]
+      }
+    ]
+  },
+  {
+    name: "Bà Rịa - Vũng Tàu",
+    districts: [
+      {
+        name: "Thành phố Vũng Tàu",
+        wards: [
+          { name: "Phường 1", groups: ["Khu phố 1", "Khu phố 2"] }
+        ]
+      }
+    ]
+  },
+  {
+    name: "Long An",
+    districts: [
+      {
+        name: "Thành phố Tân An",
+        wards: [
+          { name: "Phường 1", groups: ["Khu phố 1", "Khu phố 2"] }
+        ]
+      }
+    ]
+  },
+  {
+    name: "Tiền Giang",
+    districts: [
+      {
+        name: "Thành phố Mỹ Tho",
+        wards: [
+          { name: "Phường 1", groups: ["Khu phố 1", "Khu phố 2"] }
         ]
       }
     ]

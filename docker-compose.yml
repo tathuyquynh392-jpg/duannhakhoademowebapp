@@ -1,0 +1,27 @@
+services:
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: lucky_dental_backend
+    restart: always
+    environment:
+      - DATABASE_URL=sqlite:////app/dental_clinic.db
+    volumes:
+      - lucky_dental_db_data:/app
+    ports:
+      - "8000:8000"
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: lucky_dental_frontend
+    restart: always
+    ports:
+      - "3000:80"
+    depends_on:
+      - backend
+
+volumes:
+  lucky_dental_db_data:

@@ -99,7 +99,7 @@ function AppRoutes() {
 }
 
 export default function App() {
-  const basename = import.meta.env.BASE_URL || '/duannhakhoademowebapp';
+  const basename = import.meta.env.BASE_URL || '/';
   return (
     <AuthProvider>
       <Router basename={basename}>
