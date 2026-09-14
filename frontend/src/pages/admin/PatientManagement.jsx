@@ -50,9 +50,9 @@ const PatientManagement = () => {
   const handleCreateSubmit = async (e) => {
     e.preventDefault();
     setMessage({ type: '', text: '' });
-    const addressParts = (formData.address || '').split(',').map(s => s.trim()).filter(Boolean);
-    if (addressParts.length < 4) {
-      setMessage({ type: 'error', text: 'Vui lòng chọn đầy đủ địa chỉ.' });
+    // Address validation (optional or flexible)
+    if (formData.address && formData.address.includes('---')) {
+      setMessage({ type: 'error', text: 'Vui lòng chọn hợp lệ địa chỉ từ danh mục.' });
       return;
     }
     try {

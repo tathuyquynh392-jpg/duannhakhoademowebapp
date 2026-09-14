@@ -40,9 +40,8 @@ const ProfilePage = () => {
 
   const handleUpdate = async (e) => {
     e.preventDefault();
-    const addressParts = (address || '').split(',').map(s => s.trim()).filter(Boolean);
-    if (addressParts.length < 4) {
-      setMessage({ type: 'error', text: 'Vui lòng chọn đầy đủ địa chỉ.' });
+    if (address && address.includes('---')) {
+      setMessage({ type: 'error', text: 'Vui lòng chọn hợp lệ địa chỉ từ danh mục.' });
       return;
     }
     try {
